@@ -2,7 +2,7 @@
   <div class="preson">
       <ul>
           <li>name:{{name}}</li>
-          <li>sex:{{sex}}</li>
+          <li>sex:{{sex}} || {{getSex}}</li>
           <li>age:{{age}}</li>
       </ul>
       <input type="text" @input="setAge" :value="age"> {{test}}
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState,mapGetters} from 'vuex';
 export default {
     //数组方法
     //computed : mapState(['name','sex','age']),
@@ -20,6 +20,7 @@ export default {
         test(){
             return 'test'
         },
+        ...mapGetters(['getSex']),
         ...mapState({
             name: state => state.name,
             sex : 'sex',
@@ -28,8 +29,6 @@ export default {
             }
         })
     },
-
-
     methods:{
         setAge(e){
             this.$store.commit('setAge',e.target.value)

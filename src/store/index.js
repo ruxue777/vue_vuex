@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import list from './module/list'
 
 Vue.use(Vuex)
 
@@ -9,7 +10,13 @@ export default new Vuex.Store({
     count:0,
     name:'ruxue',
     age:18,
-    sex:'man'
+    sex:'man',
+    info :'a'
+  },
+  getters:{
+    getSex(state){
+      return `【${state.sex}】`
+    }
   },
   //修改状态
   mutations: {
@@ -18,10 +25,19 @@ export default new Vuex.Store({
     },
     setAge(state,value){
       state.age = value
+    },
+    setInfo(state,value){
+      state.info = value
     }
   },
   actions: {
+    setInfo(context){
+      setTimeout(()=>{
+        context.commit('setInfo','异步信息')
+      },1000)
+    }
   },
   modules: {
+    list
   }
 })
